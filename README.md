@@ -1,20 +1,3 @@
-# `ZINIT-CONFIGS`
-
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [Introduction](#introduction)
-  - [Pull-requests welcomed!](#pull-requests-welcomed)
-- [Searching the repository](#searching-the-repository)
-  - [OR](#or)
-- [Submitting zshrc](#submitting-zshrc)
-- [The repository structure](#the-repository-structure)
-- [Try configurations with docker](#try-configurations-with-docker)
-  - [Requirements](#requirements)
-  - [Running a configuration](#running-a-configuration)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # Introduction
 
 <h2>Pull-requests welcomed!</h2>
