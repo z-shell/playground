@@ -9,8 +9,7 @@ RUN apt update && \
         vim htop
 
 # Set the locale
-RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
-    locale-gen
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
@@ -44,6 +43,6 @@ RUN if [ -f /home/user/bootstrap.sh ]; then \
 # Install all plugins
 ARG TERM
 ENV TERM ${TERM}
-RUN SHELL=/bin/zsh zsh -i -c -- 'zinit module build; @zinit-scheduler burst || true '
+RUN SHELL=/bin/zsh zsh -i -c -- 'zi module build; @zi-scheduler burst || true '
 
 CMD zsh -i -l
