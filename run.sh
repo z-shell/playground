@@ -26,11 +26,7 @@ FOLDER=$(${FUZZY_FINDER} <<< ${FOLDERS_WITH_ZSHRC})
 
 # Build an image
 FOLDER_LOWERCASE="${(L)FOLDER}"
-docker build \
-    --build-arg FOLDER="${FOLDER}" \
-    --build-arg TERM="${TERM}" \
-    -t "zplg-configs/${FOLDER_LOWERCASE}" \
-    "${0:a:h}"
+docker build --build-arg FOLDER="${FOLDER}" --build-arg TERM="${TERM}" -t "zi-configs/${FOLDER_LOWERCASE}" "${0:a:h}"
 
 # Run a container
-docker run -ti --rm "zplg-configs/${FOLDER_LOWERCASE}" env TERM="${TERM}" zsh -i -l
+docker run -ti --rm "zi-configs/${FOLDER_LOWERCASE}" env TERM="${TERM}" zsh -i -l
