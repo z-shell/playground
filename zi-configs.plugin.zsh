@@ -1,7 +1,6 @@
-
 # Directory of the script
 CURRENT_DIR=${0:a:h}
 
-zplugin-configs() {
+zi-configs() {
     "${CURRENT_DIR}"/run.sh
 }
