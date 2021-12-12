@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:impish-20210928
 
 # Update && install common dependencies
 ARG DEBIAN_FRONTEND=noninteractive
