@@ -1,6 +1,6 @@
 # Directory of the script
 CURRENT_DIR=${0:a:h}
 
-zi-configs() {
+playground() {
     "${CURRENT_DIR}"/run.sh
 }
