@@ -12,6 +12,7 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
+
 # Add user
 RUN adduser --disabled-password --gecos '' user && adduser user sudo && \
   echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && usermod --shell /bin/zsh user
@@ -27,8 +28,8 @@ COPY --chown=user "$FOLDER" /home/user
 RUN cp -vf /home/user/zshrc.zsh /home/user/.zshrc 2>/dev/null || true
 
 # Install Rust language
-#RUN curl 'https://sh.rustup.rs' -sSf | sh -s -- -y  && \
-#  echo 'source ${HOME}/.cargo/env' >> /home/user/.zshenv
+RUN curl 'https://sh.rustup.rs' -sSf | sh -s -- -y  && \
+  echo 'source ${HOME}/.cargo/env' >> /home/user/.zshenv
 
 # Run user's bootstrap script
 RUN if [ -f /home/user/bootstrap.sh ]; then \
@@ -41,6 +42,6 @@ WORKDIR /home/user
 # Install all plugins
 ARG TERM
 ENV TERM $TERM
-RUN SHELL=/bin/zsh -ils -c -- '@zi-scheduler burst || true'
+RUN SHELL=/bin/zsh zsh -i -c -- '@zi-scheduler burst || true '
 
 CMD ["/bin/zsh","-i","-l"]
