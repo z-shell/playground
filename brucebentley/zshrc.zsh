@@ -6,11 +6,11 @@
 
 PROFILE_STARTUP=false
 if [[ "$PROFILE_STARTUP" == true ]]; then
-    zmodload zsh/zprof
-    # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
-    PS4=$'%D{%M%S%.} %N:%i> '
-    exec 3>&2 2>$HOME/startlog.$$
-    setopt xtrace prompt_subst
+  zmodload zsh/zprof
+  # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+  PS4=$'%D{%M%S%.} %N:%i> '
+  exec 3>&2 2>$HOME/startlog.$$
+  setopt xtrace prompt_subst
 fi
 
 
@@ -22,7 +22,7 @@ fi
 # Initialization code that may require console input ( password prompts, [y/n]
 # confirmations, etc. ) must go above this block, everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 
@@ -154,22 +154,22 @@ setopt extended_history         # Show Timestamp In History.
 
 
 # - - - - - - - - - - - - - - - - - - - -
-# Zinit Configuration
+# ZI Configuration
 # - - - - - - - - - - - - - - - - - - - -
 
-__ZINIT="${ZDOTDIR:-$HOME}/.zinit/bin/zinit.zsh"
+__ZI="${ZDOTDIR:-$HOME}/.zi/bin/zi.zsh"
 
-if [[ ! -f "$__ZINIT" ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing DHARMA Initiative Plugin Manager (zdharma/zinit)…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+if [[ ! -f "$__ZI" ]]; then
+  print -P "%F{33}▓▒░ %F{220}Installing ZI Initiative Plugin Manager (z-shell/zi)…%f"
+  command mkdir -p "$HOME/.zi" && command chmod g-rwX "$HOME/.zi"
+  command git clone https://github.com/z-shell/zi "$HOME/.zi/bin" && \
+    print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+    print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
-. "$__ZINIT"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
+. "$__ZI"
+autoload -Uz _zi
+(( ${+_comps} )) && _comps[zi]=_zi
 
 
 # - - - - - - - - - - - - - - - - - - - -
@@ -180,77 +180,77 @@ autoload -Uz _zinit
 setopt promptsubst
 
 # These plugins provide many aliases - atload''
-zinit wait lucid for \
-        OMZ::lib/git.zsh \
-    atload"unalias grv" \
-        OMZ::plugins/git/git.plugin.zsh
+zi wait lucid for \
+  OMZ::lib/git.zsh \
+atload"unalias grv" \
+  OMZ::plugins/git/git.plugin.zsh
 
 # Provide A Simple Prompt Till The Theme Loads
 PS1="READY >"
-zinit ice wait'!' lucid
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+zi ice wait'!' lucid
+zi ice depth=1; zi light romkatv/powerlevel10k
 
 
 # - - - - - - - - - - - - - - - - - - - -
 # Annexes
 # - - - - - - - - - - - - - - - - - - - -
 
-# Load a few important annexes, without Turbo (this is currently required for annexes)
-zinit light-mode compile"handler" for \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-bin-gem-node \
-    zinit-zsh/z-a-submods \
-    zdharma/declare-zsh
+# Load a few important annexes, without Turbo.
+zi light-mode compile"handler" for \
+z-shell/z-a-patch-dl \
+z-shell/z-a-readurl \
+z-shell/z-a-bin-gem-node \
+z-shell/z-a-submods \
+z-shell/declare-zsh
 
 
 # - - - - - - - - - - - - - - - - - - - -
 # Plugins
 # - - - - - - - - - - - - - - - - - - - -
 
-zinit wait lucid light-mode for \
-      OMZ::lib/compfix.zsh \
-      OMZ::lib/completion.zsh \
-      OMZ::lib/functions.zsh \
-      OMZ::lib/diagnostics.zsh \
-      OMZ::lib/git.zsh \
-      OMZ::lib/grep.zsh \
-      OMZ::lib/key-bindings.zsh \
-      OMZ::lib/misc.zsh \
-      OMZ::lib/spectrum.zsh \
-      OMZ::lib/termsupport.zsh \
-      OMZ::plugins/git-auto-fetch/git-auto-fetch.plugin.zsh \
-  atinit"zicompinit; zicdreplay" \
-        zdharma/fast-syntax-highlighting \
-      OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh \
-      OMZ::plugins/command-not-found/command-not-found.plugin.zsh \
-  atload"_zsh_autosuggest_start" \
-      zsh-users/zsh-autosuggestions \
-  as"completion" \
-      OMZ::plugins/docker/_docker \
-      OMZ::plugins/composer/composer.plugin.zsh \
-      OMZ::plugins/thefuck/thefuck.plugin.zsh \
-      htlsne/zplugin-rbenv \
-      OMZ::plugins/pyenv/pyenv.plugin.zsh
+zi wait lucid light-mode for \
+  OMZ::lib/compfix.zsh \
+  OMZ::lib/completion.zsh \
+  OMZ::lib/functions.zsh \
+  OMZ::lib/diagnostics.zsh \
+  OMZ::lib/git.zsh \
+  OMZ::lib/grep.zsh \
+  OMZ::lib/key-bindings.zsh \
+  OMZ::lib/misc.zsh \
+  OMZ::lib/spectrum.zsh \
+  OMZ::lib/termsupport.zsh \
+  OMZ::plugins/git-auto-fetch/git-auto-fetch.plugin.zsh \
+atinit"zicompinit; zicdreplay" \
+  z-shell/F-Sy-H \
+  OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh \
+  OMZ::plugins/command-not-found/command-not-found.plugin.zsh \
+atload"_zsh_autosuggest_start" \
+  zsh-users/zsh-autosuggestions \
+as"completion" \
+  OMZ::plugins/docker/_docker \
+  OMZ::plugins/composer/composer.plugin.zsh \
+  OMZ::plugins/thefuck/thefuck.plugin.zsh \
+  htlsne/zplugin-rbenv \
+  OMZ::plugins/pyenv/pyenv.plugin.zsh
 
 # Recommended Be Loaded Last.
-zinit ice wait blockf lucid atpull'zinit creinstall -q .'
-zinit load zsh-users/zsh-completions
+zi ice wait blockf lucid atpull'zi creinstall -q .'
+zi load zsh-users/zsh-completions
 
 # rbenv
-# zinit ice has'rbenv' id-as'rbenv' atpull'%atclone' \
+# zi ice has'rbenv' id-as'rbenv' atpull'%atclone' \
 #     atclone"rbenv init - --no-rehash > htlsne/zplugin-rbenv"
-# zinit load zdharma/null
+# zi load z-shell/null
 
 # pyenv
-# zinit ice has'pyenv' id-as'pyenv' atpull'%atclone' \
+# zi ice has'pyenv' id-as'pyenv' atpull'%atclone' \
 #     atclone"pyenv init - --no-rehash > pyenv.plugin.zsh"
-# zinit load zdharma/null
+# zi load z-shell/null
 
-# Semi-graphical .zshrc editor for zinit commands
-zinit load zdharma/zui
-zinit ice lucid wait'[[ -n ${ZLAST_COMMANDS[(r)cras*]} ]]'
-zinit load zdharma/zplugin-crasis
+# Semi-graphical .zshrc editor for zi commands
+zi load z-shell/zui
+zi ice lucid wait'[[ -n ${ZLAST_COMMANDS[(r)cras*]} ]]'
+zi load z-shell/zplugin-crasis
 
 
 # - - - - - - - - - - - - - - - - - - - -
@@ -267,12 +267,12 @@ setopt no_beep
 # [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 foreach piece (
-    exports.zsh
-    node.zsh
-    aliases.zsh
-    functions.zsh
+  exports.zsh
+  node.zsh
+  aliases.zsh
+  functions.zsh
 ) {
-    . $ZSH/config/$piece
+  . $ZSH/config/$piece
 }
 
 
@@ -286,18 +286,18 @@ DIRSTACKFILE="$HOME/.cache/zsh/dirs"
 
 # Make `DIRSTACKFILE` If It 'S Not There.
 if [[ ! -a $DIRSTACKFILE ]]; then
-    mkdir -p $DIRSTACKFILE[0,-5]
-    touch $DIRSTACKFILE
+  mkdir -p $DIRSTACKFILE[0,-5]
+  touch $DIRSTACKFILE
 fi
 
 if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
-    dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+  dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
 fi
 
 chpwd() {
-    print -l $PWD ${(u)dirstack} >>$DIRSTACKFILE
-    local d="$(sort -u $DIRSTACKFILE )"
-    echo "$d" > $DIRSTACKFILE
+  print -l $PWD ${(u)dirstack} >>$DIRSTACKFILE
+  local d="$(sort -u $DIRSTACKFILE )"
+  echo "$d" > $DIRSTACKFILE
 }
 
 DIRSTACKSIZE=20
@@ -321,7 +321,7 @@ setopt pushd_minus              # This Reverts The +/- Operators.
 # - - - - - - - - - - - - - - - - - - - -
 
 if [[ "$PROFILE_STARTUP" == true ]]; then
-    unsetopt xtrace
-    exec 2>&3 3>&-
-    zprof > ~/zshprofile$(date +'%s')
+  unsetopt xtrace
+  exec 2>&3 3>&-
+  zprof > ~/zshprofile$(date +'%s')
 fi

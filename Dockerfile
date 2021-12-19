@@ -2,11 +2,9 @@ FROM ubuntu:impish-20211102
 
 # Update && install common dependencies
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt update && \
-  apt install -yq \
+RUN apt update && apt install -yq \
   ncurses-dev man telnet unzip zsh git subversion curl make sudo locales \
-  autoconf automake python golang-go \
-  vim htop
+  autoconf automake python3 golang-go vim htop
 
 # Set the locale
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
@@ -22,7 +20,7 @@ RUN adduser --disabled-password --gecos '' user         && \
 USER user
 
 # Install
-RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ss-o/zi-src/main/lib/sh/install.sh)"
+RUN bash <(curl -fsSL https://raw.githubusercontent.com/z-shell/zi-src/main/lib/sh/install.sh)
 
 # Copy configs into home directory
 ARG FOLDER
@@ -43,6 +41,6 @@ RUN if [ -f /home/user/bootstrap.sh ]; then \
 # Install all plugins
 ARG TERM
 ENV TERM ${TERM}
-RUN SHELL=/bin/zsh zsh -i -c -- 'zi module build; @zi-scheduler burst || true '
+RUN SHELL=/bin/zsh zsh -i -c -- '@zi-scheduler burst || true '
 
 CMD zsh -i -l
