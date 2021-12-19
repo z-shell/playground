@@ -20,7 +20,7 @@ RUN adduser --disabled-password --gecos '' user         && \
 USER user
 
 # Install
-RUN bash <(curl -fsSL https://raw.githubusercontent.com/z-shell/zi-src/main/lib/sh/install.sh)
+RUN sh <(curl -fsSL https://raw.githubusercontent.com/z-shell/zi-src/main/lib/sh/install.sh)
 
 # Copy configs into home directory
 ARG FOLDER
@@ -41,6 +41,6 @@ RUN if [ -f /home/user/bootstrap.sh ]; then \
 # Install all plugins
 ARG TERM
 ENV TERM ${TERM}
-RUN SHELL=/bin/zsh zsh -i -c -- '@zi-scheduler burst || true '
+RUN SHELL=/bin/zsh zsh -i -c -- '@zi-scheduler burst || true'
 
 CMD zsh -i -l
