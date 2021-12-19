@@ -1,14 +1,10 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 - [URL](#url)
 - [Username](#username)
 - [Zshrc body](#zshrc-body)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ---
-name: Request to add zshrc to the zplugin-configs repo
+
+name: Request to add zshrc to the playground repo
 about: Use this to submit a zshrc to the repo
 title: ''
 labels: ''
