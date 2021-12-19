@@ -8,7 +8,6 @@ if [[ ! -f $HOME/.zi/bin/zi.zsh ]]; then
     print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
     print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
-
 source "$HOME/.zi/bin/zi.zsh"
 autoload -Uz _zi
 (( ${+_comps} )) && _comps[zi]=_zi
@@ -18,7 +17,7 @@ autoload -Uz _zi
 # PROMPT            #
 #####################
 zi lucid for \
-  as"command" from"gh-r" atinit'export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"' atload'eval "$(starship init zsh)"' bpick'*unknown-linux-gnu*' \
+as"command" from"gh-r" atinit'export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"' atload'eval "$(starship init zsh)"' bpick'*unknown-linux-gnu*' \
   starship/starship \
 
 
@@ -40,12 +39,10 @@ zi lucid for \
 atinit"
   ZSH_TMUX_FIXTERM=true
   ZSH_TMUX_AUTOSTART=true
-  ZSH_TMUX_AUTOCONNECT=true
-" \
+  ZSH_TMUX_AUTOCONNECT=true" \
 OMZP::tmux \
-atinit"HIST_STAMPS=dd.mm.yyyy" \
+  atinit"HIST_STAMPS=dd.mm.yyyy" \
 OMZL::history.zsh \
-
 
 zi wait lucid for \
 OMZL::clipboard.zsh \
@@ -56,8 +53,7 @@ OMZL::correction.zsh \
   alias ..='cd ..'
   alias ...='cd ../..'
   alias ....='cd ../../..'
-  alias .....='cd ../../../..'
-  " \
+  alias .....='cd ../../../..'" \
 OMZL::directories.zsh \
 OMZL::git.zsh \
 OMZL::grep.zsh \
@@ -65,16 +61,14 @@ OMZL::key-bindings.zsh \
 OMZL::spectrum.zsh \
 OMZL::termsupport.zsh \
   atload"
-  alias gcd='gco dev'
-  " \
+  alias gcd='gco dev'" \
 OMZP::git \
 OMZP::fzf \
   atload"
-  alias dcupb='docker-compose up --build'
-  " \
+  alias dcupb='docker-compose up --build'" \
 OMZP::docker-compose \
-as"completion" \
-  OMZP::docker/_docker \
+  as"completion" \
+OMZP::docker/_docker \
   djui/alias-tips \
   # hlissner/zsh-autopair \
   # chriskempson/base16-shell \
@@ -128,7 +122,7 @@ pick"z.sh" \
 as'command' atinit'export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"' pick"bin/n" \
   tj/n \
 from'gh-r' as'command' atinit'export PATH="$HOME/.yarn/bin:$PATH"' mv'yarn* -> yarn' pick"yarn/bin/yarn" bpick'*.tar.gz' \
-  yarnpkg/yarn
+  yarnpkg/yarn \
 
 
 #####################
