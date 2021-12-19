@@ -33,6 +33,7 @@ jobs:
           MATRIX="$(find * \( -name .zshrc -o -name zshrc.zsh \) -type f -exec dirname {} \;)"
           echo "MATRIX=${MATRIX}" >&2
           echo "::set-output name=matrix::${MATRIX}"
+
   images:
     runs-on: ubuntu-latest
     needs: build-matrix
@@ -40,8 +41,6 @@ jobs:
       fail-fast: false
       matrix: ${{ fromJSON(needs.build-matrix.outputs.matrix) }}
       
-  build:
-    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
