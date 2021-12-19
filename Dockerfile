@@ -3,8 +3,10 @@ FROM ubuntu:impish-20211102
 # Update && install common dependencies
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt install -yq \
-  ncurses-dev man telnet unzip zsh git subversion curl make sudo locales \
-  autoconf automake python3 golang-go vim htop
+  ncurses-dev man telnet zsh git subversion curl make sudo locales \
+  autoconf automake python3 golang-go vim htop \
+  p7zip-full unrar unzip tree
+
 
 # Set the locale
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
