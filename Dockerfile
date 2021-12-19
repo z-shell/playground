@@ -4,9 +4,7 @@ FROM ubuntu:impish-20211102
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt install -yq \
   ncurses-dev man telnet zsh git subversion curl make sudo locales \
-  autoconf automake python3 golang-go vim htop \
-  p7zip-full unrar unzip tree
-
+  autoconf automake python3 golang-go vim htop p7zip-full unrar unzip tree
 
 # Set the locale
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
@@ -29,8 +27,8 @@ COPY --chown=user "$FOLDER" /home/user
 RUN cp -vf /home/user/zshrc.zsh /home/user/.zshrc 2>/dev/null || true
 
 # Install Rust language
-RUN curl 'https://sh.rustup.rs' -sSf | sh -s -- -y  && \
-  echo 'source ${HOME}/.cargo/env' >> /home/user/.zshenv
+#RUN curl 'https://sh.rustup.rs' -sSf | sh -s -- -y  && \
+#  echo 'source ${HOME}/.cargo/env' >> /home/user/.zshenv
 
 # Run user's bootstrap script
 RUN if [ -f /home/user/bootstrap.sh ]; then \
@@ -38,9 +36,11 @@ RUN if [ -f /home/user/bootstrap.sh ]; then \
   /home/user/bootstrap.sh; \
   fi
 
+WORKDIR /home/user
+
 # Install all plugins
 ARG TERM
 ENV TERM $TERM
-RUN SHELL=/bin/zsh zsh -i -c -- '@zi-scheduler burst || true'
+RUN SHELL=/bin/zsh -ils -c -- '@zi-scheduler burst || true'
 
-CMD zsh -i -l
+CMD ["/bin/zsh","-i","-l"]
