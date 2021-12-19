@@ -1,0 +1,36 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: ⤵️ Check out code from GitHub
+        uses: actions/checkout@v2
+      - name: "✨ Set matrix output"
+        id: set-matrix
+        run: |
+          MATRIX="$(find * \( -name .zshrc -o -name zshrc.zsh \) -type f -exec dirname {} \;)"
+          echo "MATRIX=${MATRIX}" >&2
+          echo "::set-output name=matrix::${MATRIX}"
+
+  images:
+    runs-on: ubuntu-latest
+    needs: build-matrix
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.build-matrix.outputs.matrix) }}
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+  
+      run: |
+        docker build . --build-arg FOLDER="${{ matrix.file }}" --build-arg TERM="${TERM}" --file Dockerfile --tag ${{ matrix.file }}:$(date +%s)
