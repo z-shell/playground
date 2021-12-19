@@ -22,7 +22,7 @@ else
 fi
 
 # Folder to load, chosen by user
-FOLDER=$(${FUZZY_FINDER} <<< ${FOLDERS_WITH_ZSHRC})
+#FOLDER=$(${FUZZY_FINDER} <<< ${FOLDERS_WITH_ZSHRC})
 
 # Build an image
 FOLDER_LOWERCASE="${(L)FOLDER}"
