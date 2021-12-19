@@ -47,8 +47,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export UPDATE_INTERVAL=15
 
 export DOTFILES="$HOME/dotfiles"
+[[ -d "$DOTFILES" ]] || mkdir -p "$DOTFILES"
 export ZSH="$HOME/dotfiles/zsh"
-
+[[ -d "$ZSH" ]] || mkdir -p "$ZSH"
 export CACHEDIR="$HOME/.local/share"
 [[ -d "$CACHEDIR" ]] || mkdir -p "$CACHEDIR"
 
