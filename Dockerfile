@@ -21,15 +21,15 @@ USER user
 # Install
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/z-shell/zi-src/main/lib/sh/install.sh)"
 
+# Install Rust language
+RUN curl 'https://sh.rustup.rs' -sSf | sh -s -- -y  && \
+  echo 'source ${HOME}/.cargo/env' >> /home/user/.zshenv
+
 # Copy configs into home directory
 ARG FOLDER
 COPY --chown=user "$FOLDER" /home/user
 # Copy of a possible .zshrc named according to a non-leading-dot scheme
 RUN cp -vf /home/user/zshrc.zsh /home/user/.zshrc 2>/dev/null || true
-
-# Install Rust language
-RUN curl 'https://sh.rustup.rs' -sSf | sh -s -- -y  && \
-  echo 'source ${HOME}/.cargo/env' >> /home/user/.zshenv
 
 # Run user's bootstrap script
 RUN if [ -f /home/user/bootstrap.sh ]; then \
