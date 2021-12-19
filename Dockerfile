@@ -13,18 +13,16 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # Add user
-RUN adduser --disabled-password --gecos '' user         && \
-  adduser user sudo                                   && \
-  echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
-  usermod --shell /bin/zsh user
+RUN adduser --disabled-password --gecos '' user && adduser user sudo && \
+  echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && usermod --shell /bin/zsh user
 USER user
 
 # Install
-RUN sh <(curl -fsSL https://raw.githubusercontent.com/z-shell/zi-src/main/lib/sh/install.sh)
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/z-shell/zi-src/main/lib/sh/install.sh)"
 
 # Copy configs into home directory
 ARG FOLDER
-COPY --chown=user "${FOLDER}" /home/user
+COPY --chown=user "$FOLDER" /home/user
 # Copy of a possible .zshrc named according to a non-leading-dot scheme
 RUN cp -vf /home/user/zshrc.zsh /home/user/.zshrc 2>/dev/null || true
 
@@ -40,7 +38,7 @@ RUN if [ -f /home/user/bootstrap.sh ]; then \
 
 # Install all plugins
 ARG TERM
-ENV TERM ${TERM}
+ENV TERM $TERM
 RUN SHELL=/bin/zsh zsh -i -c -- '@zi-scheduler burst || true'
 
 CMD zsh -i -l
