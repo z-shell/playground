@@ -1,8 +1,6 @@
 # ~/.zshrc
 #
 # https://github.com/agkozak/dotfiles
-#
-# shellcheck disable=SC1090,SC2034,SC2128,SC2148,SC2154
 
 # If zsh is emulating another shell {{{1
 
@@ -269,23 +267,23 @@ fi
 
 # }}}1
 
-# zinit {{{1
+# zi {{{1
 
 if (( AGKDOT_NO_ZPLUGIN != 1 )) && is-at-least 5; then
 
   # Optional binary module
-  if [[ -f "$HOME/.zinit/bin/zmodules/Src/zdharma/zplugin.so" ]]; then
-    module_path+=( "$HOME/.zinit/bin/zmodules/Src" )
-    zmodload zdharma/zplugin
+  if [[ -f "$HOME/.zi/zmodules/zpmod/Src/zi/zpmod.so" ]]; then
+    module_path+=( $HOME/.zi/zmodules/zpmod/Src )
+    zmodload zi/zpmod
   fi
 
   if whence -w git &> /dev/null; then
 
-    if [[ ! -d ${HOME}/.zinit/bin ]]; then
-      print 'Installing zinit...'
-      mkdir -p "${HOME}/.zinit"
-      git clone https://github.com/zdharma/zinit.git "${HOME}/.zinit/bin"
-      compile_or_recompile "${HOME}/.zinit/bin/zinit.zsh"
+    if [[ ! -d ${HOME}/.zi/bin ]]; then
+      print 'Installing zi...'
+      mkdir -p "${HOME}/.zi"
+      git clone https://github.com/z-shell/zi.git "${HOME}/.zi/bin"
+      compile_or_recompile "${HOME}/.zi/bin/zi.zsh"
     fi
 
     # Configuration hash
@@ -294,8 +292,8 @@ if (( AGKDOT_NO_ZPLUGIN != 1 )) && is-at-least 5; then
     # Location of .zcompdump file
     ZINIT[ZCOMPDUMP_PATH]="${HOME}/.zcompdump_${ZSH_VERSION}"
 
-    # zinit and its plugins and snippets
-    source "${HOME}/.zinit/bin/zinit.zsh"
+    # zi and its plugins and snippets
+    source "${HOME}/.zi/bin/zi.zsh"
 
     # Load plugins and snippets {{{2
 
@@ -305,12 +303,12 @@ if (( AGKDOT_NO_ZPLUGIN != 1 )) && is-at-least 5; then
     # AGKOZAK_MULTILINE=0
     # AGKOZAK_PROMPT_CHAR=( '❯' '❯' '❮' )
     # AGKOZAK_PROMPT_DEBUG=1
-    zinit ver"develop" for agkozak/agkozak-zsh-prompt
+    zi ver"develop" for agkozak/agkozak-zsh-prompt
 
-    # zinit light agkozak/polyglot
+    # zi light agkozak/polyglot
     # if which kubectl &> /dev/null; then
-    #   zinit light jonmosco/kube-ps1
-    #   zinit light agkozak/polyglot-kube-ps1
+    #   zi light jonmosco/kube-ps1
+    #   zi light agkozak/polyglot-kube-ps1
     # fi
 
     # agkozak/zsh-z
@@ -318,23 +316,23 @@ if (( AGKDOT_NO_ZPLUGIN != 1 )) && is-at-least 5; then
     ZSHZ_DEBUG=1
     [[ $OSTYPE == freebsd* ]] && typeset -g ZSHZ_NO_RESOLVE_SYMLINKS=1
 
-    zinit ver"develop" lucid wait for \
+    zi ver"develop" lucid wait for \
       agkozak/zhooks \
       agkozak/zsh-z
 
     # zsh-titles causes dittography in Emacs shell and Vim terminal
     if (( ! $+EMACS )) && [[ $TERM != 'dumb' ]] && (( ! $+VIM_TERMINAL )); then
-      zinit lucid wait for jreese/zsh-titles
+      zi lucid wait for jreese/zsh-titles
     fi
 
     if [[ $AGKDOT_SYSTEMINFO != *ish* ]]; then
-      zinit lucid wait for zdharma/zui
-      zinit lucid wait'1' for zdharma/zbrowse
+      zi lucid wait for z-shell/zui
+      zi lucid wait'1' for z-shell/zbrowse
     fi
 
-    zinit snippet OMZ::plugins/extract/extract.plugin.zsh
+    zi snippet OMZ::plugins/extract/extract.plugin.zsh
 
-    zinit lucid wait for zsh-users/zsh-history-substring-search
+    zi lucid wait for zsh-users/zsh-history-substring-search
     HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='underline'
     HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND=''
     zle -N history-substring-search-up
@@ -348,13 +346,13 @@ if (( AGKDOT_NO_ZPLUGIN != 1 )) && is-at-least 5; then
     if [[ $OSTYPE == (msys|cygwin) ]] \
       || [[ $AGKDOT_SYSTEMINFO == *Microsoft* ]]; then
       # Git highlighting can be very slow on Windows
-      zinit ice \
+      zi ice \
         atload'unset "FAST_HIGHLIGHT[chroma-git]"; fast-theme free &> /dev/null' \
         lucid wait
     else
-      zinit ice atload'fast-theme free &> /dev/null' lucid wait
+      zi ice atload'fast-theme free &> /dev/null' lucid wait
     fi
-    zinit load zdharma/fast-syntax-highlighting
+    zi load z-shell/F-Sy-H
 
   else
     print 'Please install git.'
@@ -380,7 +378,7 @@ fi
 autoload -Uz compinit
 compinit -u -d "${HOME}/.zcompdump_${ZSH_VERSION}"
 
-(( ! AGKDOT_NO_ZPLUGIN )) && is-at-least 5 && zinit cdreplay -q
+(( ! AGKDOT_NO_ZPLUGIN )) && is-at-least 5 && zi cdreplay -q
 
 # https://www.zsh.org/mla/users/2015/msg00467.html
 # shellcheck disable=SC2016
@@ -488,10 +486,10 @@ KEYTIMEOUT=1
 # Static named directories
 [[ -d ${HOME}/public_html/wp-content ]] \
   && hash -d wp-content="$HOME/public_html/wp-content"
-[[ -d ${HOME}/.zinit/plugins/agkozak---agkozak-zsh-prompt ]] \
-  && hash -d agk="$HOME/.zinit/plugins/agkozak---agkozak-zsh-prompt"
-[[ -d ${HOME}/.zinit/plugins/agkozak---zsh-z ]] \
-  && hash -d z="$HOME/.zinit/plugins/agkozak---zsh-z"
+[[ -d ${HOME}/.zi/plugins/agkozak---agkozak-zsh-prompt ]] \
+  && hash -d agk="$HOME/.zi/plugins/agkozak---agkozak-zsh-prompt"
+[[ -d ${HOME}/.zi/plugins/agkozak---zsh-z ]] \
+  && hash -d z="$HOME/.zi/plugins/agkozak---zsh-z"
 
 # Dynamic named directories
 # https://superuser.com/questions/751523/dynamic-directory-hash

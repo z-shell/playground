@@ -15,7 +15,7 @@ AGKDOT_SYSTEMINFO=$(uname -a)
 # Environment variables {{{1
 
 export EDITOR VISUAL
-if command -v vim > /dev/null 2>&1; then
+if command -v vim >/dev/null 2>&1; then
   EDITOR='vim'
 else
   EDITOR='vi'
@@ -26,15 +26,16 @@ export ENV
 ENV="$HOME/.shrc"
 
 case $(ls -l "$(command -v less)") in
-  *busybox*) ;;
+*busybox*) ;;
+*)
+  case $AGKDOT_SYSTEMINFO in
+  UWIN*) ;;
   *)
-    case $AGKDOT_SYSTEMINFO in
-      UWIN*) ;;
-      *)
-        export LESS
-        LESS='-R'
-        ;;
-    esac
+    export LESS
+    LESS='-R'
+    ;;
+  esac
+  ;;
 esac
 
 # if command -v lesspipe > /dev/null 2>&1; then
@@ -68,22 +69,22 @@ PAGER=less
 export PATH
 
 # Construct $PATH
-for i in "$HOME/.gem/ruby/2.4.0/bin" \
+for i in "$HOME/.gem/ruby/3.0.0/bin" \
   "$HOME/.local/bin" \
   "$HOME/go/bin" \
-	"$HOME/.cabal/bin" \
-	"$HOME/.config/composer/vendor/bin" \
-	"$HOME/.composer/vendor/bin" \
+  "$HOME/.cabal/bin" \
+  "$HOME/.config/composer/vendor/bin" \
+  "$HOME/.composer/vendor/bin" \
   "$HOME/.luarocks/bin" \
-	"$HOME/ruby/gems/bin" \
-	"$HOME/.rvim/bin" \
-	"$HOME/bin"; do
+  "$HOME/ruby/gems/bin" \
+  "$HOME/.rvim/bin" \
+  "$HOME/bin"; do
   if [ -d "$i" ]; then
     case :$PATH: in
-      *:$i:*) ;;
-      *)
-        PATH="$i:$PATH"
-        ;;
+    *:$i:*) ;;
+    *)
+      PATH="$i:$PATH"
+      ;;
     esac
   fi
 done
@@ -91,7 +92,7 @@ done
 unset i
 
 case $AGKDOT_SYSTEMINFO in
-  *Msys) [ -d /mingw64/bin ] && PATH="$PATH:/mingw64/bin" ;;
+*Msys) [ -d /mingw64/bin ] && PATH="$PATH:/mingw64/bin" ;;
 esac
 
 # Load RVM into a shell session *as a function*
@@ -99,38 +100,38 @@ esac
 [ -s "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm"
 
 case $AGKDOT_SYSTEMINFO in
-	Darwin*|FreeBSD*)
-		export CLICOLOR LSCOLORS SSL_CERT_DIR SSL_CERT_FILE
-		CLICOLOR=1
-		LSCOLORS='ExfxcxdxBxegedAbagacad'
-		SSL_CERT_DIR=/etc/ssl/certs
-		SSL_CERT_FILE=/etc/ssl/cert.pem
-	  ;;
-	*Msys)
-		export MSYS SSL_CERT_DIR SSL_CERT_FILE
-		# `ln` creates native symlinks in Windows -- only works for administrator
-		MSYS="winsymlinks:nativestrict"
-    unset PYTHONHOME
-		[ ! -f /usr/bin/zsh ] && SHELL=/usr/bin/bash
-		SSL_CERT_DIR=/mingw64/ssl/certs
-		SSL_CERT_FILE=/mingw64/ssl/cert.pem
-	  ;;
-	*Cygwin)
-		export CYGWIN
-    # `ln` creates native symlinks in Windows -- only works for administrator
-    CYGWIN="winsymlinks:native"
-		unset PYTHONHOME SSL_CERT_DIR SSL_CERT_FILE
-	  ;;
-  *raspberrypi*)
-	  command -v chromium-browser > /dev/null 2>&1 && BROWSER='chromium-browser'
-    ;;
+Darwin* | FreeBSD*)
+  export CLICOLOR LSCOLORS SSL_CERT_DIR SSL_CERT_FILE
+  CLICOLOR=1
+  LSCOLORS='ExfxcxdxBxegedAbagacad'
+  SSL_CERT_DIR=/etc/ssl/certs
+  SSL_CERT_FILE=/etc/ssl/cert.pem
+  ;;
+*Msys)
+  export MSYS SSL_CERT_DIR SSL_CERT_FILE
+  # `ln` creates native symlinks in Windows -- only works for administrator
+  MSYS="winsymlinks:nativestrict"
+  unset PYTHONHOME
+  [ ! -f /usr/bin/zsh ] && SHELL=/usr/bin/bash
+  SSL_CERT_DIR=/mingw64/ssl/certs
+  SSL_CERT_FILE=/mingw64/ssl/cert.pem
+  ;;
+*Cygwin)
+  export CYGWIN
+  # `ln` creates native symlinks in Windows -- only works for administrator
+  CYGWIN="winsymlinks:native"
+  unset PYTHONHOME SSL_CERT_DIR SSL_CERT_FILE
+  ;;
+*raspberrypi*)
+  command -v chromium-browser >/dev/null 2>&1 && BROWSER='chromium-browser'
+  ;;
 esac
 
 # }}}1
 
 # umask {{{1
 
-if [ "$(umask)" = "000" ]; then            # For WSL
+if [ "$(umask)" = "000" ]; then # For WSL
   umask 022
 fi
 
@@ -139,8 +140,8 @@ fi
 # Source ~/.profile.local {{{1
 
 if [ -f "$HOME/.profile.local" ]; then
-	# shellcheck source=/dev/null
-	. "$HOME/.profile.local"
+  # shellcheck source=/dev/null
+  . "$HOME/.profile.local"
 fi
 
 # }}}1
