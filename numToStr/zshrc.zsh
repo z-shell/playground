@@ -88,14 +88,11 @@ as"completion" \
 # These plugins should be loaded after ohmyzsh plugins
 
 zi wait lucid for \
+light-mode from"gh-r" as"program" \
+  junegunn/fzf-bin \
 light-mode atinit"ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20" atload"_zsh_autosuggest_start" \
   zsh-users/zsh-autosuggestions \
-light-mode atinit"
-  typeset -gA FAST_HIGHLIGHT;
-  FAST_HIGHLIGHT[git-cmsg-len]=100;
-  zicompinit;
-  zicdreplay;
-" \
+light-mode atinit"typeset -gA FAST_HIGHLIGHT; FAST_HIGHLIGHT[git-cmsg-len]=100; zicompinit; zicdreplay;" \
   z-shell/F-Sy-H \
 light-mode blockf atpull'zi creinstall -q .' \
 atinit"
@@ -109,31 +106,28 @@ atinit"
   zstyle ':fzf-tab:complete:_zlua:*' query-string input
   zstyle ':completion:*:*:*:*:processes' command 'ps -u $USER -o pid,user,comm,cmd -w -w'
   zstyle ':fzf-tab:complete:kill:argument-rest' extra-opts --preview=$extract'ps --pid=$in[(w)1] -o cmd --no-headers -w -w' --preview-window=down:3:wrap
-  zstyle ':fzf-tab:complete:cd:*' extra-opts --preview=$extract'exa -1 --color=always ${~ctxt[hpre]}$in'
-" \
+  zstyle ':fzf-tab:complete:cd:*' extra-opts --preview=$extract'exa -1 --color=always ${~ctxt[hpre]}$in'" \
   zsh-users/zsh-completions \
 bindmap"^R -> ^H" atinit"
   zstyle :history-search-multi-word page-size 10
   zstyle :history-search-multi-word highlight-color fg=red,bold
-  zstyle :plugin:history-search-multi-word reset-prompt-protect 1
-" \
+  zstyle :plugin:history-search-multi-word reset-prompt-protect 1" \
   z-shell/H-S-MW \
 reset \
 atclone"local P=${${(M)OSTYPE:#*darwin*}:+g}${P}sed -i '/DIR/c\DIR 38;5;63;1' LS_COLORS; ${P}dircolors -b LS_COLORS > c.zsh" \
-atpull'%atclone' pick"c.zsh" nocompile'!' \
-atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”' \
-	trapd00r/LS_COLORS
+atpull'%atclone' pick"c.zsh" nocompile'!' atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”' \
+  trapd00r/LS_COLORS
 
 #####################
 # PROGRAMS          #
 #####################
 
 zi wait'1' lucid light-mode for \
-  pick"z.sh" \
+pick"z.sh" \
   knu/z \
-  as'command' atinit'export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"' pick"bin/n" \
+as'command' atinit'export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"' pick"bin/n" \
   tj/n \
-  from'gh-r' as'command' atinit'export PATH="$HOME/.yarn/bin:$PATH"' mv'yarn* -> yarn' pick"yarn/bin/yarn" bpick'*.tar.gz' \
+from'gh-r' as'command' atinit'export PATH="$HOME/.yarn/bin:$PATH"' mv'yarn* -> yarn' pick"yarn/bin/yarn" bpick'*.tar.gz' \
   yarnpkg/yarn
 
 
