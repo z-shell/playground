@@ -1,29 +1,28 @@
-
 #################################################################
-# INSTALL `zinit` AND LOAD IT
+# INSTALL `zi` AND LOAD IT
 #
 
-# Install `zinit` if not installed
-if [ ! -d "${HOME}/.zinit" ]; then
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+# Install `zi` if not installed
+if [ ! -d "${HOME}/.zi" ]; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/z-shell/zi-src/main/lib/sh/install.sh)"
 fi
 
-# Load `zinit`
-source "${HOME}/.zinit/bin/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
+# Load `zi`
+source "${HOME}/.zi/bin/zi.zsh"
+autoload -Uz _zi
+(( ${+_comps} )) && _comps[zi]=_zi
 
 
 #################################################################
 # FUNCTIONS TO MAKE CONFIGURATION LESS VERBOSE
 #
 
-turbo0()   { zinit ice wait"0a" lucid             "${@}"; }
-turbo1()   { zinit ice wait"0b" lucid             "${@}"; }
-turbo2()   { zinit ice wait"0c" lucid             "${@}"; }
-zcommand() { zinit ice wait"0b" lucid as"command" "${@}"; }
-zload()    { zinit load                           "${@}"; }
-zsnippet() { zinit snippet                        "${@}"; }
+turbo0()   { zi ice wait"0a" lucid             "${@}"; }
+turbo1()   { zi ice wait"0b" lucid             "${@}"; }
+turbo2()   { zi ice wait"0c" lucid             "${@}"; }
+zcommand() { zi ice wait"0b" lucid as"command" "${@}"; }
+zload()    { zi load                           "${@}"; }
+zsnippet() { zi snippet                        "${@}"; }
 
 
 #################################################################
@@ -62,8 +61,8 @@ zcommand from"gh-r";         zload junegunn/fzf-bin
 zcommand pick"bin/fzf-tmux"; zload junegunn/fzf
 # Create and bind multiple widgets using fzf
 turbo0 multisrc"shell/{completion,key-bindings}.zsh" \
-        id-as"junegunn/fzf_completions" pick"/dev/null"
-    zload junegunn/fzf
+id-as"junegunn/fzf_completions" pick"/dev/null"
+  zload junegunn/fzf
 
 # Fuzzy movement and directory choosing
 turbo1; zload rupa/z               # autojump command
@@ -76,8 +75,8 @@ zcommand pick"v"; zload rupa/v
 # Install `fzy` fuzzy finder, if not yet present in the system
 # Also install helper scripts for tmux and dwtm
 turbo0 as"command" if'[[ -z "$commands[fzy]" ]]' \
-       make"!PREFIX=$ZPFX install" atclone"cp contrib/fzy-* $ZPFX/bin/" pick"$ZPFX/bin/fzy*"
-    zload jhawthorn/fzy
+make"!PREFIX=$ZPFX install" atclone"cp contrib/fzy-* $ZPFX/bin/" pick"$ZPFX/bin/fzy*"
+  zload jhawthorn/fzy
 # Install fzy-using widgets
 turbo0 silent; zload aperezdc/zsh-fzy
 bindkey '\ec' fzy-cd-widget
@@ -97,26 +96,26 @@ export EDITOR=${EDITOR:-vim}
 
 # Install `ffsend` (a Firefox Send client) statically-linked binary
 zcommand from"gh-r" bpick"*-static" mv"* -> ffsend";
-    zload timvisee/ffsend
+  zload timvisee/ffsend
 # Install `ffsend` completions
 turbo0 as'completion' id-as'timvisee/ffsend_completions'
-    zsnippet 'https://raw.githubusercontent.com/timvisee/ffsend/master/contrib/completions/_ffsend'
+  zsnippet 'https://raw.githubusercontent.com/timvisee/ffsend/master/contrib/completions/_ffsend'
 
 # Install `cloc` (code summary) binary if not already installed via package manager
 zcommand if'[[ -z "$commands[cloc]" ]]' from"gh-r" bpick"*pl" mv"cloc-* -> cloc";
-    zload AlDanial/cloc
+  zload AlDanial/cloc
 
 # Install timelapse screen recorder
 zcommand from"gh-r" mv'tl-* -> tl' if'[[ -n $DISPLAY ]]'
-    zload ryanmjacobs/tl
+  zload ryanmjacobs/tl
 
 
 #################################################################
 # INSTALL `k` COMMAND AND GENERATE COMPLITIONS
 #
 turbo0; zload RobSis/zsh-completion-generator
-turbo1 atclone"gencomp k; ZINIT[COMPINIT_OPTS]='-i' zpcompinit" atpull'%atclone'
-    zload supercrabtree/k
+turbo1 atclone"gencomp k; ZI[COMPINIT_OPTS]='-i' zicompinit" atpull'%atclone'
+  zload supercrabtree/k
 alias l='k -h'
 
 
@@ -125,7 +124,7 @@ alias l='k -h'
 #
 
 # Add `git dsf` command to git
-zcommand pick"bin/git-dsf";            zload zdharma/zsh-diff-so-fancy
+zcommand pick"bin/git-dsf";            zload z-shell/zsh-diff-so-fancy
 
 # Add command-line online translator
 turbo1 if'[[ -n "$commands[gawk]" ]]'; zload soimort/translate-shell
@@ -151,11 +150,11 @@ export GITCD_HOME=${HOME}/tmp
 
 # Install completions for `my` script and for python-gist
 # (use `-f` flag to force completion installation)
-zinit ice as"completion" if"[ -f '${HOME}/.zsh/completions/_my' ]" id-as"my";
-    zsnippet "${HOME}/.zsh/completions/_my"
+zi ice as"completion" if"[ -f '${HOME}/.zsh/completions/_my' ]" id-as"my";
+  zsnippet "${HOME}/.zsh/completions/_my"
 
 turbo0 as"completion" if"[ -f '${HOME}/.local/share/gist/gist.zsh' ]" id-as"gist" mv"gist.zsh -> _gist";
-    zsnippet "${HOME}/.local/share/gist/gist.zsh"
+  zsnippet "${HOME}/.local/share/gist/gist.zsh"
 
 
 #################################################################
@@ -167,12 +166,12 @@ turbo0 blockf
 zload zsh-users/zsh-completions
 
 # History search by `Ctrl+R`
-turbo1; zload zdharma/history-search-multi-word
+turbo1; zload z-shell/history-search-multi-word
 
 # Syntax highlighting
 # (compinit without `-i` spawns warning on `sudo -s`)
-turbo0 atinit"ZINIT[COMPINIT_OPTS]='-i' zpcompinit; zpcdreplay"
-    zload zdharma/fast-syntax-highlighting
+turbo0 atinit"ZI[COMPINIT_OPTS]='-i' zicompinit; zicdreplay"
+  zload z-shell/F-Sy-H
 
 # Autosuggestions
 # Note: should go _after_ syntax highlighting plugin
