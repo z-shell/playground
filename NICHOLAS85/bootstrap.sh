@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-zi light-mode for \
-    z-shell/z-a-meta-plugins @rust-utils
+curl 'https://sh.rustup.rs' -sSf | sh -s -- -y
+echo 'source ${HOME}/.cargo/env' >> ${HOME}/.zshenv
     
 sudo apt install --yes tlp lscolors fd-find fzf
 cargo install lsd
