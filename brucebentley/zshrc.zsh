@@ -197,7 +197,7 @@ zi ice depth=1; zi light romkatv/powerlevel10k
 # - - - - - - - - - - - - - - - - - - - -
 
 # Load a few important annexes, without Turbo.
-zi light-mode compile"handler" for \
+zt light-mode compile'*handler' for \
 z-shell/z-a-patch-dl \
 z-shell/z-a-readurl \
 z-shell/z-a-bin-gem-node \
@@ -229,29 +229,26 @@ atload"_zsh_autosuggest_start" \
   zsh-users/zsh-autosuggestions \
 as"completion" \
   OMZ::plugins/docker/_docker \
-  OMZ::plugins/composer/composer.plugin.zsh \
-  OMZ::plugins/thefuck/thefuck.plugin.zsh \
-  htlsne/zplugin-rbenv \
-  OMZ::plugins/pyenv/pyenv.plugin.zsh
+  OMZ::plugins/composer/composer.plugin.zsh
 
 # Recommended Be Loaded Last.
 zi ice wait blockf lucid atpull'zi creinstall -q .'
 zi load zsh-users/zsh-completions
 
 # rbenv
-# zi ice has'rbenv' id-as'rbenv' atpull'%atclone' \
-#     atclone"rbenv init - --no-rehash > htlsne/zplugin-rbenv"
-# zi load z-shell/null
+#zi ice has'rbenv' id-as'rbenv' atpull'%atclone' \
+#  atclone"rbenv init - --no-rehash > htlsne/zplugin-rbenv"
+#zi load z-shell/null
 
 # pyenv
-# zi ice has'pyenv' id-as'pyenv' atpull'%atclone' \
-#     atclone"pyenv init - --no-rehash > pyenv.plugin.zsh"
-# zi load z-shell/null
+#zi ice has'pyenv' id-as'pyenv' atpull'%atclone' \
+#  atclone"pyenv init - --no-rehash > pyenv.plugin.zsh"
+#zi load z-shell/null
 
 # Semi-graphical .zshrc editor for zi commands
 zi load z-shell/zui
 zi ice lucid wait'[[ -n ${ZLAST_COMMANDS[(r)cras*]} ]]'
-zi load z-shell/zplugin-crasis
+zi load z-shell/zi-crasis
 
 
 # - - - - - - - - - - - - - - - - - - - -
@@ -259,13 +256,13 @@ zi load z-shell/zplugin-crasis
 # - - - - - - - - - - - - - - - - - - - -
 
 setopt no_beep
-# export MANPATH="/usr/local/man:$MANPATH"
+export MANPATH="/usr/local/man:$MANPATH"
 
 # Load Custom Executable Functions
-# [[ -f "$ZSH/config/functions.zsh" ]] && source "$ZSH/config/functions.zsh"
+[[ -f "$ZSH/config/functions.zsh" ]] && source "$ZSH/config/functions.zsh"
 
 # Local Config
-# [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 foreach piece (
   exports.zsh
@@ -273,7 +270,7 @@ foreach piece (
   aliases.zsh
   functions.zsh
 ) {
-  . $ZSH/config/$piece
+[[ -f "${ZSH}/config/${piece}" ]] && source "${ZSH}/config/${piece}"
 }
 
 
