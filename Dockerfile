@@ -4,8 +4,8 @@ ARG USERNAME=user
 # Update && install common dependencies
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y jq git man subversion curl telnet rsync \
-  libuser ncurses-dev file zsh make tree locales apt-utils sudo autoconf automake python3-dev \
-  vim htop unzip \
+  libuser ncurses-dev file zsh make tree locales apt-utils sudo autoconf automake \
+  python3-dev python3-pip python-is-python3 vim htop unzip \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ARG TERM
