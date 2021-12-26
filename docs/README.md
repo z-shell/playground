@@ -1,23 +1,29 @@
+<h2 align="center">
+  <a href="https://github.com/z-shell/zi">
+    <img src="https://github.com/z-shell/zi/raw/main/docs/images/logo.svg" alt="Logo" width="80" height="80">
+  </a>
+❮ ZI ❯ Playground
+</h2>
+
 <h2>Pull-requests welcomed!</h2>
 
 Feel free to submit your zshrc if it contains `zi` commands.
-
-# Submitting zshrc
 
 You can either:
 
 - open a PR – fastest method
 - submit an issue with URL to the zshrc (or with the zshrc pasted) – [a quick link](https://github.com/z-shell/playground/issues/new?assignees=&labels=&template=request-to-add-zshrc.md)
 
-# The repository structure
+## The repository structure
 
-The structure of the repository is very simple: in its main directory there are
-directories located, named after the user-names of the submitting users. In
-those directories there are the zshrc files that the user decided to share.
+The structure of the repository is very simple: 
+- Directories named after the user-names of the submitting users. 
+- In those directories there are files that the user decided to share.
+- For additional installs/setup, create and fill `bootstrap.zsh`
 
-# Try configurations with docker
+## Try configurations with docker
 
-## Requirements
+### Requirements
 
 You should have [docker](https://docs.docker.com/install/) and `zsh` installed
 to use this functionality. Check you have them present on your system:
@@ -44,7 +50,7 @@ zi load jhawthorn/fzy
 
 Keep in mind you will need a few Gb of free space to store docker images.
 
-## Running a configuration
+### Running a configuration
 
 To try a configuration, you have to clone this repository and execute a `run.sh` script:
 
