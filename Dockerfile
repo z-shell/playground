@@ -1,5 +1,9 @@
 FROM ubuntu:impish
-ARG USERNAME=user DEBIAN_FRONTEND=noninteractive TERM FOLDER
+
+ARG USERNAME=user
+ARG DEBIAN_FRONTEND=noninteractive
+ARG TERM
+ARG FOLDER
 
 RUN apt-get update \
 && apt-get install -yq apt-utils jq git subversion telnet gnupg2 dirmngr iproute2 procps lsof htop \
