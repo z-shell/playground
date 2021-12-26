@@ -2,11 +2,10 @@ FROM ubuntu:impish
 ARG USERNAME=user DEBIAN_FRONTEND=noninteractive TERM FOLDER
 
 RUN apt-get update \
-&& package_list="apt-utils jq git subversion telnet gnupg2 dirmngr iproute2 procps lsof htop \
-  net-tools psmisc curl wget rsync ca-certificates unzip zip nano ncurses-dev file zsh make \
-  vim-tiny less jq lsb-release apt-transport-https dialog zlib1g tree autoconf automake sudo \
-  python3-dev python3-pip python-is-python3 ocales ncdu man-db strace manpages manpages-dev" \
-&& apt-get install "$package_list" -yq \
+&& apt-get install -yq apt-utils jq git subversion telnet gnupg2 dirmngr iproute2 procps lsof htop \
+net-tools psmisc curl wget rsync ca-certificates unzip zip nano ncurses-dev file zsh make \
+vim-tiny less jq lsb-release apt-transport-https dialog zlib1g tree autoconf automake sudo \
+python3-dev python3-pip python-is-python3 ocales ncdu man-db strace manpages manpages-dev \
 && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ENV TERM $TERM 
