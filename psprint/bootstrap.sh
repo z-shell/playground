@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 
+sudo apt update
 sudo DEBIAN_FRONTEND=noninteractive apt install --yes cmake redis-server libhiredis-dev \
   tree gem libfreetype6-dev libfontconfig-dev \
   autoconf automake nodejs npm
