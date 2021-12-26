@@ -197,7 +197,7 @@ zi ice depth=1; zi light romkatv/powerlevel10k
 # - - - - - - - - - - - - - - - - - - - -
 
 # Load a few important annexes, without Turbo.
-zt light-mode compile'*handler' for \
+zi light-mode compile'*handler' for \
 z-shell/z-a-patch-dl \
 z-shell/z-a-readurl \
 z-shell/z-a-bin-gem-node \
