@@ -161,9 +161,7 @@ as'completion' mv'*.zsh -> _git' \
 
 zt 0c light-mode for \
 pack'bgn-binary' \
-  junegunn/fzf \
-sbin from'gh-r' submods'NICHOLAS85/zsh-fast-alias-tips -> plugin' pick'plugin/*.zsh' \
-  sei40kr/fast-alias-tips-bin
+  junegunn/fzf
 
 zt 0c light-mode binary for \
 sbin'fd*/fd;fd*/fd -> fdfind' from"gh-r" \
