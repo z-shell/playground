@@ -239,7 +239,7 @@ palette() { local colors; for n in {000..255}; do colors+=("%F{$n}$n%f"); done; 
 zflai-msg "[zshrc] ssl tunnel PID: $!"
 
 #
-# Zplugin
+# ZI
 #
 
 typeset -F4 SECONDS=0
@@ -255,11 +255,7 @@ autoload -Uz _zi
 
 # annexes
 zi light-mode for \
-  z-shell/z-a-readurl \
-  z-shell/z-a-patch-dl \
-  z-shell/z-a-submods \
-  z-shell/z-a-bin-gem-node \
-  z-shell/z-a-rust
+    z-shell/z-a-meta-plugins @annexes
 
 # Fast-syntax-highlighting & autosuggestions
 zi wait lucid for \
@@ -329,7 +325,7 @@ sbin"color.zsh -> color" \
   molovo/color
 
 # revolver
-zi wait"2" lucid as"program" pick"revolver" for z-shell/revolver
+zi wait"2" lucid as"program" pick"revolver" for molovo/revolver
 
 zi pack for dircolors-material
 
@@ -384,7 +380,7 @@ pick"zsh-github-issues.service.zsh" for \
 
 # ogham/exa, sharkdp/fd, fzf
 zi wait"2" lucid as"null" from"gh-r" for \
-mv"exa* -> exa" sbin  ogham/exa \
+mv"exa* -> exa" sbin'**/exa -> exa' atclone'cp -vf completions/exa.zsh _exa' @ogham/exa \
 mv"fd* -> fd" sbin"fd/fd"  @sharkdp/fd
 
 # fzf, fzy
