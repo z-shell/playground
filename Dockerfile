@@ -10,7 +10,9 @@ RUN apt-get update && apt-get install -y jq git subversion \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ARG TERM
-ENV TERM $TERM SHELL=/bin/zsh LANG en_US.UTF-8
+ENV TERM $TERM 
+ENV SHELL=/bin/zsh 
+ENV LANG en_US.UTF-8
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
 
 # Add user
@@ -20,10 +22,6 @@ USER ${USERNAME}
 
 # Install
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/z-shell/zi-src/main/lib/sh/install.sh)"
-
-# Install Rust language
-#RUN curl 'https://sh.rustup.rs' -sSf | sh -s -- -y  && \
-#echo 'source ${HOME}/.cargo/env' >> /home/${USERNAME}/.zshenv
 
 # Copy configs into home directory
 ARG FOLDER
