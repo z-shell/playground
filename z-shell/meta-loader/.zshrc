@@ -9,7 +9,8 @@ zi-turbo '0a' light-mode for OMZL::git.zsh \
   OMZL::spectrum.zsh OMZL::clipboard.zsh OMZL::functions.zsh \
   OMZL::completion.zsh OMZL::termsupport.zsh OMZL::directories.zsh
 zi-turbo '0b' light-mode for atload"unalias grv g" \
-  OMZP::git OMZP::sudo OMZP::extract OMZP::encode64 OMZP::colorize
-zi light-mode for z-shell/z-a-meta-plugins zpm-zsh/ls MichaelAquilina/zsh-you-should-use \ 
-  @annexes skip'fzy' @fuzzy skip'tig' @console-tools skip'git-extras' @ext-git @romkatv skip'F-Sy-H' @z-shell \
-  @zsh-users+fast
+  OMZP::git OMZP::sudo OMZP::extract OMZP::encode64 OMZP::colorize \
+  zpm-zsh/ls MichaelAquilina/zsh-you-should-use
+zi light-mode for z-shell/z-a-meta-plugins @annexes \
+  skip'fzy' @fuzzy skip'tig' @console-tools skip'git-extras' @ext-git \
+  @romkatv skip'F-Sy-H' @z-shell @zsh-users+fast
