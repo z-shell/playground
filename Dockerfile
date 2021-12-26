@@ -9,7 +9,8 @@ RUN apt-get update && apt-get install -y jq git subversion \
   base-files tree build-essential locales apt-utils ruby-dev nodejs \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-ENV LANG en_US.UTF-8
+ARG TERM
+ENV TERM $TERM SHELL=/bin/zsh LANG en_US.UTF-8
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
 
 # Add user
@@ -21,8 +22,8 @@ USER ${USERNAME}
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/z-shell/zi-src/main/lib/sh/install.sh)"
 
 # Install Rust language
-RUN curl 'https://sh.rustup.rs' -sSf | sh -s -- -y  && \
-echo 'source ${HOME}/.cargo/env' >> /home/${USERNAME}/.zshenv
+#RUN curl 'https://sh.rustup.rs' -sSf | sh -s -- -y  && \
+#echo 'source ${HOME}/.cargo/env' >> /home/${USERNAME}/.zshenv
 
 # Copy configs into home directory
 ARG FOLDER
@@ -40,8 +41,6 @@ RUN if [ -f /home/${USERNAME}/bootstrap.sh ]; then \
 WORKDIR /home/${USERNAME}
 
 # Install all plugins
-ARG TERM
-ENV TERM $TERM
-RUN SHELL=/bin/zsh zsh -ils -c -- '@zi-scheduler burst || true'
+RUN zsh -ils -c -- '@zi-scheduler burst || true'
 
 CMD ["/bin/zsh"]
