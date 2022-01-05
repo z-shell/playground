@@ -1,4 +1,4 @@
-FROM ubuntu:focal-slim
+FROM ubuntu:latest
 
 ARG USERNAME=user
 ARG DEBIAN_FRONTEND=noninteractive
