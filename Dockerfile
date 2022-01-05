@@ -13,7 +13,6 @@ python3-dev python3-pip python-is-python3 man-db strace
 ENV TERM $TERM 
 ENV SHELL=/bin/zsh 
 ENV LANG en_US.UTF-8
-ENV LC_ALL=en_US.UTF-8
 RUN echo 'playground' > /etc/hostname
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
 
