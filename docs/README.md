@@ -7,7 +7,7 @@
 
 <h2>Pull-requests welcomed!</h2>
 
-Feel free to submit your zshrc if it contains `zi` commands.
+Feel free to submit your `zshrc` if it contains `zi` commands.
 
 You can either:
 
@@ -25,23 +25,24 @@ The structure of the repository is very simple:
 
 ### Requirements
 
-You should have [docker](https://docs.docker.com/install/) and `zsh` installed
-to use this functionality. Check you have them present on your system:
+You should have present on your system:
 
-```sh
-docker version
-zsh --version
-```
+- `zsh > 5.3`
+- [docker](https://docs.docker.com/install/) - `curl https://get.docker.com | sh`
+- [fzf](https://github.com/junegunn/fzf) or [fzy](https://github.com/jhawthorn/fzy) in your `$PATH`. 
 
-The other dependency is interactive filter. You should have either
-[fzf](https://github.com/junegunn/fzf) or
-[fzy](https://github.com/jhawthorn/fzy) in your `$PATH`. You might choose to install any of them via zi:
+#### You might choose to install via zi:
 
-```sh
-# Install fzf
+Install fzf:
+
+```shell
 zi ice from"gh-r" as"command"
 zi load junegunn/fzf-bin
-# or fzy
+```
+
+Install fzy:
+
+```shell
 zi ice as"command" make"\!PREFIX=$ZPFX install" \
     atclone"cp contrib/fzy-* $ZPFX/bin/" \
     pick"$ZPFX/bin/fzy*"
@@ -54,22 +55,17 @@ Keep in mind you will need a few Gb of free space to store docker images.
 
 To try a configuration, you have to clone this repository and execute a `run.sh` script:
 
-```sh
-# Clone repository with configurations
+```shell
 git clone 'https://github.com/z-shell/playground'
-# Run the configuration picker
 ./playground/run.sh
 ```
 
 … or you can install this repository as a `zsh` plugin!
 
-```sh
-# Then, install this repo
+```shell
 zi load z-shell/playground
-# Run the command
 playground
 ```
 
 Now you will have to wait for a few minutes, while the required environment is
-being installed into the docker image. The next time you will want to try
-a configuration, loading it will take less time.
+being installed into the docker image. The next time you will want to try a configuration, loading it will take less time.
