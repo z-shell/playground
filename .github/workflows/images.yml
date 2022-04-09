@@ -1,0 +1,66 @@
+---
+name: '🐋 Docker images'
+
+on:
+  push:
+  pull_request:
+    paths:
+      - "./zi/**"
+    workflow_dispatch:
+
+jobs:
+  build-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: ⤵️ Check out code from GitHub
+        uses: actions/checkout@v3
+      - name: "✨ Set matrix output"
+        id: set-matrix
+        run: |
+          FOLDERS_WITH_ZSHRC="$(find * \( -name .zshrc -o -name zshrc.zsh \) -type f -exec dirname {} \; -print | jq -ncR '{"include": [{"file": inputs}]}')"
+          echo "FOLDERS_WITH_ZSHRC=${FOLDERS_WITH_ZSHRC}" >&2
+          echo "::set-output name=matrix::${FOLDERS_WITH_ZSHRC}"
+
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.build-matrix.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: rlespinasse/github-slug-action@v4
+      - uses: docker/setup-qemu-action@v1
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+        with:
+          install: true
+          use: true
+      - uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Docker Layer Caching
+        uses: satackey/action-docker-layer-caching@v0.0.11
+        with:
+          key: docker-layer-caching-${{ github.workflow }}-{hash}
+          restore-keys: docker-layer-caching-${{ github.workflow }}-
+          concurrency: 6
+          skip-save: false
+      - name: Build and push
+        id: docker_build_images
+        uses: docker/build-push-action@v2
+        timeout-minutes: 60
+        with:
+          push: ${{ github.event.number == 0 }}
+          file: Dockerfile
+          build-args: FOLDER="${{ matrix.file }}" TERM="${TERM}"
+          tags: ghcr.io/${{ github.repository }}:${{ matrix.file }}
+          platforms: linux/arm64/v8 linux/amd64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
