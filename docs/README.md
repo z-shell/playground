@@ -16,8 +16,9 @@ You can either:
 
 ## The repository structure
 
-The structure of the repository is very simple: 
-- Directories named after the user-names of the submitting users. 
+The structure of the repository is very simple:
+
+- Directories named after the user-names of the submitting users.
 - In those directories there are files that the user decided to share.
 - For additional installs/setup, create and fill `bootstrap.zsh`
 
@@ -29,9 +30,9 @@ You should have present on your system:
 
 - `zsh > 5.3`
 - [docker](https://docs.docker.com/install/) - `curl https://get.docker.com | sh`
-- [fzf](https://github.com/junegunn/fzf) or [fzy](https://github.com/jhawthorn/fzy) in your `$PATH`. 
+- [fzf](https://github.com/junegunn/fzf) or [fzy](https://github.com/jhawthorn/fzy) in your `$PATH`.
 
-#### You might choose to install via zi:
+#### You might choose to install via zi
 
 Install fzf:
 
