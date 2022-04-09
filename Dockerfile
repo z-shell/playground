@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:rolling
 
 ARG USERNAME="z-shell"
 ARG DEBIAN_FRONTEND=noninteractive
