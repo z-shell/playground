@@ -10,12 +10,12 @@ RUN apt-get update && \
         zlib1g tree vim nano less vim htop && \
     apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
-RUN echo 'playground' > /etc/hostname
+RUN echo 'playground' > /etc/hostname && hostnamectl hostname playground
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
-ENV TERM $TERM
+ENV TERM xterm-256color
 
 RUN adduser --disabled-password --gecos '' $USERNAME    && \
     adduser $USERNAME sudo                              && \
@@ -29,11 +29,11 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/z-shell/zi-src/main/li
 #RUN curl 'https://sh.rustup.rs' -sSf | sh -s -- -y  && \
 #    echo 'source ${HOME}/.cargo/env' >> /home/user/.zshenv
 
-RUN if [ -f /home/${USERNAME}/bootstrap.sh ]; then \
-  chmod u+x /home/${USERNAME}/bootstrap.sh; \
-  /home/${USERNAME}/bootstrap.sh; \
+RUN if [ -f /home/$USERNAME/bootstrap.sh ]; then \
+  chmod u+x /home/$USERNAME/bootstrap.sh; \
+  /home/$USERNAME/bootstrap.sh; \
 fi
 
 RUN SHELL=/bin/zsh zsh -i -c -- 'zi module build; @zi-scheduler burst || true '
-CMD zsh -i -l
+CMD ['zsh', '-i', '-l']
 
