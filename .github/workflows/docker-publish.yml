@@ -12,6 +12,8 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: z-shell
+  FOLDER: z-shell/meta-loader
+  
 jobs:
   build:
     runs-on: ubuntu-latest
