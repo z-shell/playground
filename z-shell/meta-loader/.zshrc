@@ -5,6 +5,8 @@ if [[ -r "${XDG_CONFIG_HOME:-$HOME/.config}/zi/init.zsh" ]]; then
   source "${XDG_CONFIG_HOME:-$HOME/.config}/zi/init.zsh" && zzinit
 fi
 setopt promptsubst
+module_path+=( /home/z-shell/.zi/zmodules/zpmod/Src )
+zmodload zi/zpmod 2> /dev/null
 
 zi-turbo '0a' is-snippet for svn atinit'HISTFILE="${HOME}/.cache/zi/history"' \
   pick"completion.zsh" multisrc'git.zsh functions.zsh \
