@@ -19,14 +19,10 @@ jobs:
       contents: read
       packages: write
       id-token: write
-    strategy:
-      fail-fast: false
-      matrix: 
-        folders: [z-shell/meta-loader]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - run: cp -vf Dockerfile "${{ matrix.folders }}"/Dockerfile
+      - run: cp -vf Dockerfile z-shell/meta-loader/Dockerfile
       - name: Install cosign
         if: github.event_name != 'pull_request'
         uses: sigstore/cosign-installer@1e95c1de343b5b0c23352d6417ee3e48d5bcd422
@@ -50,8 +46,8 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
-          context: ${{ matrix.folders }}
-          build-args: FOLDER=${{ matrix.folders }} TERM=$TERM
+          context: 'z-shell/meta-loader'
+          build-args: FOLDER="z-shell/meta-loader" TERM="$TERM"
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
