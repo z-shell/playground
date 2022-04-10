@@ -52,7 +52,7 @@ jobs:
           context: .
           build-args: FOLDER="${{ matrix.folders }}" TERM="${TERM}"
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ matrix.folders }}/${{ steps.meta.outputs.tags }}
+          tags: zi/${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
       - name: Sign the published Docker image
         if: ${{ github.event_name != 'pull_request' }}
