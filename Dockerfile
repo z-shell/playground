@@ -20,9 +20,10 @@ RUN adduser --disabled-password --gecos '' $USERNAME    && \
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
     usermod --shell /bin/zsh $USERNAME
 USER $USERNAME
+COPY --chown=$USERNAME "$FOLDER" /home/$USERNAME
+RUN cp -vf /home/$USERNAME/zshrc.zsh /home/$USERNAME/.zshrc 2>/dev/null || true
+WORKDIR /home/$USERNAME
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/z-shell/zi-src/main/lib/sh/install.sh)" -- -i skip
-COPY --chown=${USERNAME} "$FOLDER" /home/${USERNAME}
-RUN cp -vf /home/${USERNAME}/zshrc.zsh /home/${USERNAME}/.zshrc 2>/dev/null || true
 
 #RUN curl 'https://sh.rustup.rs' -sSf | sh -s -- -y  && \
 #    echo 'source ${HOME}/.cargo/env' >> /home/user/.zshenv
