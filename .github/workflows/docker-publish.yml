@@ -11,7 +11,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ matrix.folders }}
+  IMAGE_NAME: z-shell/meta
 jobs:
   build:
     runs-on: ubuntu-latest
