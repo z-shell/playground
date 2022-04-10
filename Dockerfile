@@ -1,5 +1,6 @@
 FROM ubuntu:rolling
 
+ARG TERM
 ARG USERNAME="z-shell"
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
@@ -14,6 +15,7 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && loca
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
+ENV TERM
 
 RUN adduser --disabled-password --gecos '' $USERNAME    && \
     adduser $USERNAME sudo                              && \
@@ -24,7 +26,6 @@ COPY --chown=$USERNAME "$FOLDER" /home/$USERNAME
 RUN cp -vf /home/$USERNAME/zshrc.zsh /home/$USERNAME/.zshrc 2>/dev/null || true
 WORKDIR /home/$USERNAME
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/z-shell/zi-src/main/lib/sh/install.sh)" -- -i skip
-
 #RUN curl 'https://sh.rustup.rs' -sSf | sh -s -- -y  && \
 #    echo 'source ${HOME}/.cargo/env' >> /home/user/.zshenv
 
@@ -32,9 +33,6 @@ RUN if [ -f /home/${USERNAME}/bootstrap.sh ]; then \
   chmod u+x /home/${USERNAME}/bootstrap.sh; \
   /home/${USERNAME}/bootstrap.sh; \
 fi
-
-ARG TERM
-ENV TERM ${TERM}
 
 RUN SHELL=/bin/zsh zsh -i -c -- 'zi module build; @zi-scheduler burst || true '
 CMD zsh -i -l
