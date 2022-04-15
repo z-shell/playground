@@ -7,7 +7,7 @@ ARG USERNAME=z-shell
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
-    apt-get install --no-install-recommends -yq dirmngr iproute2 procps sudo lsb-release zlib1g tree vim nano \
+    apt-get install --no-install-recommends -yq file dirmngr iproute2 procps sudo lsb-release zlib1g tree vim nano \
         ncurses-dev man telnet unzip zsh apt-transport-https jq gnupg2 git subversion curl make sudo locales \
         autoconf automake python3-minimal python3-pip libffi-dev python3-venv golang-go rsync socat build-essential \
         less vim htop
