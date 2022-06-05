@@ -1,0 +1,15 @@
+{
+  "conventionalCommits.scopes": [
+    "maintenance",
+    "workspace",
+    "community",
+    "general",
+    "theme"
+  ],
+  "markdownlint.config": {
+    "extends": ".github/.markdownlint.yaml"
+  },
+  "files.associations": {
+    "*.md": "mdx"
+  }
+}

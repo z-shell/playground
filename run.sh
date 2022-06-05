@@ -8,7 +8,7 @@ set -o nounset   # exit on undeclared variable
 # Folders containing `.zshrc`
 FOLDERS_WITH_ZSHRC=$(
 cd "${0:a:h}"
-find * \( -name .zshrc -o -name zshrc.zsh \) -type f -exec dirname {} \;
+  find profiles/* \( -name .zshrc -o -name zshrc.zsh \) -type f -exec dirname {} \;
 )
 
 # A fuzzy finder available
@@ -22,9 +22,11 @@ else
 fi
 
 # Folder to load, chosen by user
-FOLDER=$(${FUZZY_FINDER} <<< ${FOLDERS_WITH_ZSHRC})
+FOLDER=$(${FUZZY_FINDER} <<< "${FOLDERS_WITH_ZSHRC}")
 
 # Build an image
+# trunk-ignore(shellcheck/SC2296)
+# trunk-ignore(shfmt/parse)
 FOLDER_LOWERCASE="${(L)FOLDER}"
 docker build --build-arg FOLDER="${FOLDER}" --build-arg TERM="${TERM}" -t "zi/${FOLDER_LOWERCASE}" "${0:a:h}"
 

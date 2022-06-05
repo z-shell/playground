@@ -6,12 +6,10 @@ ARG FOLDER
 ARG USERNAME=z-shell
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && \
-    apt-get install --no-install-recommends -yq file dirmngr iproute2 procps sudo lsb-release zlib1g tree vim nano \
-        ncurses-dev man telnet unzip zsh apt-transport-https jq gnupg2 git subversion curl make sudo locales \
-        autoconf automake python3-minimal python3-pip libffi-dev python3-venv golang-go rsync socat build-essential \
-        less vim htop
-RUN apt-get clean -y && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install --no-install-recommends -yq file dirmngr iproute2 procps sudo lsb-release \
+zlib1g tree vim nano ncurses-dev man telnet unzip zsh apt-transport-https jq gnupg2 git subversion curl make sudo \
+locales autoconf automake python3-minimal python3-pip libffi-dev python3-venv golang-go rsync socat build-essential \
+less vim htop && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
 ENV LANG en_US.UTF-8
@@ -40,5 +38,5 @@ RUN if [ -f /home/${USERNAME}/bootstrap.sh ]; then \
 fi
 
 WORKDIR /home/${USERNAME}
-RUN SHELL=/bin/zsh zsh -i -ls -c -- 'zi module build; @zi-scheduler burst || true '
+RUN SHELL=/bin/zsh zsh -i -lc -- 'zi module build; @zi-scheduler burst || true '
 CMD ["zsh", "-i", "-l"]
