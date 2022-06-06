@@ -2,7 +2,7 @@
 name: "▶️ Playground"
 
 on:
-  workflow_run:
+  workflow_dispatch:
   push:
     paths:
       - "profiles/**"
