@@ -21,7 +21,7 @@ jobs:
       - name: "✨ Set matrix output"
         id: set-authors
         run: |
-          MATRIX="$(find * \( -name .zshrc -o -name zshrc.zsh \) -type f -exec dirname {} \; | jq -ncR '{"author": inputs}'"
+          MATRIX="$(find * \( -name .zshrc -o -name zshrc.zsh \) -type f -exec dirname {} \; | jq -ncR '{"author": inputs}')"
           echo "MATRIX=${MATRIX}" >&2
           echo "::set-output name=authors::${MATRIX}"
   play:
