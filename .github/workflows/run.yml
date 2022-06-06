@@ -1,5 +1,5 @@
 ---
-name: 'Playground'
+name: "▶️ Playground"
 
 on:
   workflow_run:
@@ -8,8 +8,8 @@ on:
       - completed
   push:
     paths:
-      - 'profiles/**'
-  
+      - "profiles/**"
+
 jobs:
   play:
     strategy:
@@ -19,5 +19,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: 'Run: ${{ matrix.author }}'
+      - name: "▶️{{ matrix.author }}"
         run: docker build --build-arg FOLDER="${{ matrix.author }}" --build-arg TERM="${TERM}" -t "zi/${{ matrix.author }}" .
