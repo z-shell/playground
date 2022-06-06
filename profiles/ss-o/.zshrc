@@ -39,3 +39,4 @@ zi-turbo '0d' for atinit'zstyle :plugin:zuid codenames ion proxima falcon oblivi
     z-shell/zsh-unique-id zui zbrowse \
     z-shell/ztrace \
     z-shell/z-a-eval
+    
