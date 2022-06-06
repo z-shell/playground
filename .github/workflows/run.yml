@@ -3,7 +3,9 @@ name: 'Playground'
 
 on:
   workflow_run:
-    branches: main
+    workflows: [Run Tests]
+    types:
+      - completed
   push:
     paths:
       - 'profiles/**'
