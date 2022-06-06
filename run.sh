@@ -23,12 +23,8 @@ fi
 
 # Folder to load, chosen by user
 FOLDER=$(${FUZZY_FINDER} <<< "${FOLDERS_WITH_ZSHRC}")
-
-# Build an image
 # trunk-ignore(shellcheck/SC2296)
 # trunk-ignore(shfmt/parse)
 FOLDER_LOWERCASE="${(L)FOLDER}"
-docker build --build-arg FOLDER="${FOLDER}" --build-arg TERM="${TERM}" -t "zi/${FOLDER_LOWERCASE}" "${0:a:h}"
-
-# Run a container
-docker run -ti --rm "zi/${FOLDER_LOWERCASE}" env TERM="${TERM}" zsh -i -l
+docker build --build-arg FOLDER="${FOLDER}" --build-arg TERM="${TERM}" -t "playground/${FOLDER_LOWERCASE}" "${0:a:h}"
+docker run -ti --rm "playground/${FOLDER_LOWERCASE}" env TERM="${TERM}" zsh -i -l
