@@ -3,6 +3,7 @@ name: 'Playground'
 
 on:
   workflow_run:
+    branches: main
   push:
     paths:
       - 'profiles/**'
