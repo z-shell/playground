@@ -12,11 +12,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        author: [z-shell/kickstart]
+        author: [profiles/z-shell/kickstart]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: "▶️ ${{matrix.author}}"
         run: |
-          cd profiles/
-          docker build --build-arg FOLDER="${{matrix.author}}" --build-arg TERM="${TERM}" -t "zi/${{ matrix.author }}" ../Dockerfile
+          docker build --build-arg FOLDER="${{matrix.author}}" --build-arg TERM="${TERM}" -t "zi/${{ matrix.author }}" .
