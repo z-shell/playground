@@ -12,12 +12,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        author:
-          [
+        author: |
             profiles/z-shell/kickstart,
             profiles/z-shell/meta-loader,
-            profiles/ss-o,
-          ]
+            profiles/jwdevelab,
+            profiles/ss-o
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
