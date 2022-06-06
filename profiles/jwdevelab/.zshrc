@@ -1,0 +1,1 @@
+/home/jwdev/.config/zsh/.zshrc
