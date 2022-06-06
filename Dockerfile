@@ -38,5 +38,5 @@ RUN if [ -f /home/${USERNAME}/bootstrap.sh ]; then \
 fi
 
 WORKDIR /home/${USERNAME}
-RUN SHELL=/bin/zsh zsh -i -lc -- 'zi module build; @zi-scheduler burst || true '
+RUN SHELL=/bin/zsh zsh -i -lc -- '@zi-scheduler burst || true '
 CMD ["zsh", "-i", "-l"]
