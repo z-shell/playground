@@ -1,8 +1,12 @@
-<h2 align="center">
+<h1 align="center">
   <a href="https://github.com/z-shell/zi">
     <img src="https://github.com/z-shell/zi/raw/main/docs/images/logo.svg" alt="Logo" width="80" height="80">
   </a>
-❮ ZI ❯ Playground
+  ❮ ZI ❯ Playground
+</h1><h2>
+  
+[![▶️ Playground](https://github.com/z-shell/playground/actions/workflows/run.yml/badge.svg)](https://github.com/z-shell/playground/actions/workflows/run.yml)
+  
 </h2>
 
 <h2>Pull-requests welcomed!</h2>
