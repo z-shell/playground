@@ -49,8 +49,8 @@ Install fzy:
 
 ```shell
 zi ice as"command" make"\!PREFIX=$ZPFX install" \
-    atclone"cp contrib/fzy-* $ZPFX/bin/" \
-    pick"$ZPFX/bin/fzy*"
+  atclone"cp contrib/fzy-* $ZPFX/bin/" \
+  pick"$ZPFX/bin/fzy*"
 zi load jhawthorn/fzy
 ```
 
@@ -69,7 +69,7 @@ git clone 'https://github.com/z-shell/playground'
 
 ```shell
 zi load z-shell/playground
-playground
+playground; playground
 ```
 
 Now you will have to wait for a few minutes, while the required environment is
