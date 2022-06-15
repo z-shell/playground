@@ -13,8 +13,9 @@ jobs:
       fail-fast: false
       matrix:
         author:
+          - "profiles/z-shell/meta-loader"        
           - "profiles/z-shell/kickstart"
-          - "profiles/z-shell/meta-loader"
+          - "profiles/NICHOLAS85"
           - "profiles/jwdevelab"
     runs-on: ubuntu-latest
     steps:
