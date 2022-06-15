@@ -75,7 +75,7 @@ zt for if'zct dolphin' \
 if'zct p10k' \
   z-shell/null
 
-zt light-mode compile'*handler' for \
+zt light-mode for \
 z-shell/z-a-patch-dl \
 z-shell/z-a-bin-gem-node \
 z-shell/z-a-submods
