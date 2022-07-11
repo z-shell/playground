@@ -15,8 +15,6 @@ jobs:
         author:
           - "profiles/z-shell/meta-loader"
           - "profiles/z-shell/kickstart"
-          - "profiles/NICHOLAS85"
-          - "profiles/jwdevelab"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
