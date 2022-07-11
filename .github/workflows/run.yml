@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         author:
-          - "profiles/z-shell/meta-loader"        
+          - "profiles/z-shell/meta-loader"
           - "profiles/z-shell/kickstart"
           - "profiles/NICHOLAS85"
           - "profiles/jwdevelab"
