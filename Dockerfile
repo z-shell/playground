@@ -17,7 +17,6 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 ENV TERM xterm-256color
 ENV SHELL=/bin/zsh
-ENV TERM TERM
 
 RUN echo 'playground' > /etc/hostname
 RUN adduser --disabled-password --gecos '' $USERNAME    && \
@@ -30,14 +29,14 @@ RUN adduser --disabled-password --gecos '' $USERNAME    && \
 USER ${USERNAME}
 COPY --chown=${USERNAME} "$FOLDER" /home/${USERNAME}
 
-RUN cp -vf /home/${USERNAME}/zshrc.zsh /home/${USERNAME}/.zshrc 2>/dev/null || true; \
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/z-shell/zi-src/main/lib/sh/install.sh)" -- -i skip
 RUN if [ -f /home/${USERNAME}/bootstrap.sh ]; then \
   chmod u+x /home/${USERNAME}/bootstrap.sh; \
   /home/${USERNAME}/bootstrap.sh; \
 fi
 
 WORKDIR /home/${USERNAME}
+RUN cp -vf /home/${USERNAME}/zshrc.zsh /home/${USERNAME}/.zshrc 2>/dev/null || true; \
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/z-shell/zi-src/main/lib/sh/install.sh)" -- -i skip
 RUN SHELL=/bin/zsh zsh -i -lc -- '@zi-scheduler burst || true '
 CMD ["zsh", "-i", "-l"]
 
