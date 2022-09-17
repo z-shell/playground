@@ -65,11 +65,11 @@ git clone 'https://github.com/z-shell/playground'
 ./playground/run.sh
 ```
 
-… or you can install this repository as a `zsh` plugin!
+Install and run this repository as a `zsh` plugin!
 
 ```shell
 zi load z-shell/playground
-playground; playground
+playground
 ```
 
 Now you will have to wait for a few minutes, while the required environment is
