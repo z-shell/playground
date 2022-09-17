@@ -1,23 +1,33 @@
 version: 0.1
 cli:
-  version: 0.15.1-beta
+  version: 0.17.0-beta
+  options:
+    - commands: [check, fmt]
+    - args: -y
+plugins:
+  sources:
+    - id: trunk
+      ref: v0.0.3
+      uri: https://github.com/trunk-io/plugins
 repo:
   repo:
     host: github.com
     owner: z-shell
     name: playground
+actions:
+  enabled:
+    - trunk-check-pre-push
+    - trunk-fmt-pre-commit
+    - trunk-cache-prune
+    - trunk-check-upgrade
+    - trunk-upgrade
 lint:
-  linters:
-    - name: markdownlint
-      command:
-        [markdownlint, -q, --config, .github/.markdownlint.yaml, "${target}"]
-      direct_configs: [.github/.markdownlint.yaml]
   enabled:
     - git-diff-check@SYSTEM
-    - actionlint@1.6.15
-    - gitleaks@8.8.12
+    - actionlint@1.6.18
+    - gitleaks@8.12.0
     - hadolint@2.10.0
-    - markdownlint@0.32.1
+    - markdownlint@0.32.2
     - prettier@2.7.1
     - shellcheck@0.8.0
     - shfmt@3.5.0
