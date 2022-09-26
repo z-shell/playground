@@ -1,6 +1,6 @@
 version: 0.1
 cli:
-  version: 0.17.0-beta
+  version: 0.18.0-beta
   options:
     - commands: [check, fmt]
     - args: -y
@@ -16,6 +16,7 @@ repo:
     name: playground
 actions:
   enabled:
+    - trunk-upgrade-available
     - trunk-check-pre-push
     - trunk-fmt-pre-commit
     - trunk-cache-prune
