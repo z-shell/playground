@@ -1,34 +1,40 @@
 version: 0.1
 cli:
-  version: 0.18.0-beta
-  options:
-    - commands: [check, fmt]
-    - args: -y
+  version: 1.6.1
 plugins:
   sources:
     - id: trunk
-      ref: v0.0.3
+      ref: v0.0.13
       uri: https://github.com/trunk-io/plugins
 repo:
   repo:
     host: github.com
     owner: z-shell
     name: playground
+lint:
+  disabled:
+    - yamllint
+  enabled:
+    - shfmt@3.5.0
+    - actionlint@1.6.23
+    - git-diff-check
+    - gitleaks@8.16.1
+    - hadolint@2.12.0
+    - markdownlint@0.33.0
+    - prettier@2.8.6
+    - shellcheck@0.9.0
+  ignore:
+    - linters: [shellcheck]
+      paths:
+        - ./profiles/NICHOLAS85/bootstrap.sh
+runtimes:
+  enabled:
+    - go@1.19.5
+    - node@18.12.1
+    - python@3.10.8
 actions:
   enabled:
-    - trunk-upgrade-available
+    - trunk-announce
     - trunk-check-pre-push
     - trunk-fmt-pre-commit
-    - trunk-cache-prune
-    - trunk-check-upgrade
-    - trunk-upgrade
-lint:
-  enabled:
-    - git-diff-check@SYSTEM
-    - actionlint@1.6.18
-    - gitleaks@8.12.0
-    - hadolint@2.10.0
-    - markdownlint@0.32.2
-    - prettier@2.7.1
-    - shellcheck@0.8.0
-    - shfmt@3.5.0
+    - trunk-upgrade-available
