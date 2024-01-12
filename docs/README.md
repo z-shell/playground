@@ -1,15 +1,23 @@
 <h1 align="center">
-  <a href="https://github.com/z-shell/zi">
-    <img src="https://github.com/z-shell/zi/raw/main/docs/images/logo.svg" alt="Logo" width="80" height="80">
-  </a>
-  ❮ ZI ❯ Playground
-</h1><h2>
-  
-[![▶️ Playground](https://github.com/z-shell/playground/actions/workflows/run.yml/badge.svg)](https://github.com/z-shell/playground/actions/workflows/run.yml)
-  
+  <p align="center">
+    <a href="https://github.com/z-shell/zi">
+      <img align="center" src="https://github.com/z-shell/zi/raw/main/docs/images/logo.png" alt="Zi Logo" width="80" height="80" />❮ Zi ❯ Playground
+    </a>
+  </p>
+</h1>
+<h2 align="center">
+  <div align="center">
+    <img align="center" src="zi_playground.gif" alt="z-shell/playground" width="100%" height="100%" />
+  </div>
 </h2>
 
-<h2>Pull-requests welcomed!</h2>
+<h3 align="center">
+
+  [![▶️ Playground](https://github.com/z-shell/playground/actions/workflows/run.yml/badge.svg)](https://github.com/z-shell/playground/actions/workflows/run.yml)
+  
+</h3><hr />
+
+### Pull-requests welcomed!
 
 Feel free to submit your `zshrc` if it contains `zi` commands.
 
