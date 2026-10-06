@@ -13,8 +13,8 @@
 
 <h3 align="center">
 
-  [![▶️ Playground](https://github.com/z-shell/playground/actions/workflows/run.yml/badge.svg)](https://github.com/z-shell/playground/actions/workflows/run.yml)
-  
+[![▶️ Playground](https://github.com/z-shell/playground/actions/workflows/run.yml/badge.svg)](https://github.com/z-shell/playground/actions/workflows/run.yml)
+
 </h3><hr />
 
 ### Pull-requests welcomed!
