@@ -24,7 +24,7 @@ Feel free to submit your `zshrc` if it contains `zi` commands.
 You can either:
 
 - open a PR – fastest method
-- submit an issue with URL to the zshrc (or with the zshrc pasted) – [a quick link](https://github.com/z-shell/playground/issues/new?assignees=&labels=&template=request-to-add-zshrc.md)
+- submit an issue with URL to the zshrc (or with the zshrc pasted) – [a quick link](https://github.com/z-shell/playground/issues/new)
 
 ## The repository structure
 
